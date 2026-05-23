@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-[#050B16] text-white antialiased overflow-x-hidden selection:bg-purple-500 selection:text-white;
+    background-image: radial-gradient(circle at 50% 50%, #0c0a3e 0%, #050b16 100%);
+  }
+}
+
+.glow-text {
+  text-shadow: 0 0 12px rgba(168, 85, 247, 0.6), 0 0 2px rgba(168, 85, 247, 1);
+}
+
+.fantasy-gradient {
+  background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 100%);
+}
+
+.glass-panel {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.grass-edge {
+  height: 60px;
+  background: linear-gradient(to bottom, #22c55e, #14532d);
+  border-top: 4px solid #4ade80;
+}
+
+/* Custom scrollbar for beautiful lists if any */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Sparkle animation for unicorn or interactive elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 4px rgba(236, 72, 153, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 12px rgba(236, 72, 153, 0.8)); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+

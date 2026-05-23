@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Safety Net - Default Deny Everything
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Phase 3: Helper functions for verification and context identification
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Phase 2: Entity Validation Blueprint for LeaderboardEntry
+    // Strictly enforces correct keys and types, preventing any drift or ghost-parameters
+    function isValidLeaderboardEntry(data) {
+      return data.keys().hasAll(['name', 'score', 'date', 'level', 'killedByAcronym', 'killedByName', 'userId'])
+        && data.keys().size() == 7
+        && data.name is string && data.name.size() >= 1 && data.name.size() <= 30
+        && data.score is int && data.score >= 0 && data.score <= 10000000
+        && data.date is timestamp
+        && data.level is int && data.level >= 1 && data.level <= 20
+        && data.killedByAcronym is string && data.killedByAcronym.size() >= 2 && data.killedByAcronym.size() <= 100
+        && data.killedByName is string && data.killedByName.size() >= 2 && data.killedByName.size() <= 100
+        && data.userId is string && (data.userId == 'anonymous' || (isSignedIn() && data.userId == request.auth.uid));
+    }
+
+    // Scores Collection rules
+    match /scores/{scoreId} {
+      // Create is authorized for registered users or guest users saving valid records
+      allow create: if isValidId(scoreId)
+        && isValidLeaderboardEntry(incoming())
+        && incoming().date == request.time; // Verify temporal alignment with request server time
+
+      // Getting and listing is open so everyone sees the global Hall of Fame
+      allow get, list: if true;
+
+      // Immutability assurance: High score entries cannot be edited, spoofed, or deleted
+      allow update, delete: if false;
+    }
+  }
+}

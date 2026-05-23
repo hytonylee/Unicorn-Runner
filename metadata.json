@@ -1,0 +1,6 @@
+{
+  "name": "Unicorn 404 Runner",
+  "description": "A classic 404 runner game featuring a unicorn dodging the dangerous animals of Product Management with offline support and local high score tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

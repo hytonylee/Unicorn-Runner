@@ -1,0 +1,47 @@
+{
+  "entities": {
+    "LeaderboardEntry": {
+      "title": "LeaderboardEntry",
+      "description": "A high score entry on the global PM Hall of Fame",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The display name of the player"
+        },
+        "score": {
+          "type": "integer",
+          "description": "The distance score in meters"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The ISO timestamp when the score was achieved"
+        },
+        "level": {
+          "type": "integer",
+          "description": "The level reached by the player"
+        },
+        "killedByAcronym": {
+          "type": "string",
+          "description": "The acronym of the stakeholder who stopped them"
+        },
+        "killedByName": {
+          "type": "string",
+          "description": "The name of the stakeholder who stopped them"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The Firebase Auth UID of the player"
+        }
+      },
+      "required": ["name", "score", "date", "level", "killedByAcronym", "killedByName", "userId"]
+    }
+  },
+  "firestore": {
+    "/scores/{scoreId}": {
+      "schema": "LeaderboardEntry",
+      "description": "Global leaderboard entries submitted by verified players"
+    }
+  }
+}
