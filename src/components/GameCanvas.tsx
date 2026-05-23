@@ -163,6 +163,17 @@ export default function GameCanvas({
   // Handle keys
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.tagName === 'SELECT' ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+
       const targetKeys = ['Space', 'KeyW', 'ArrowUp'];
       if (targetKeys.includes(e.code) || e.key === ' ' || e.key === 'ArrowUp') {
         e.preventDefault();
@@ -211,6 +222,17 @@ export default function GameCanvas({
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.tagName === 'SELECT' ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+
       const targetKeys = ['Space', 'KeyW', 'ArrowUp'];
       if (targetKeys.includes(e.code) || e.key === ' ' || e.key === 'ArrowUp') {
         // Variable jump height: release early cuts upwards velocity
