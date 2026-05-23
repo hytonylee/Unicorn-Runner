@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6d28d9"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="url(#bg)"/>
+
+  <!-- Tail -->
+  <path d="M15 33 Q9 26 11 36 Q13 44 18 40" stroke="#f9a8d4" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M15 35 Q7 32 10 42" stroke="#d8b4fe" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Body -->
+  <ellipse cx="31" cy="36" rx="14" ry="8.5" fill="white" transform="rotate(-7 31 36)"/>
+
+  <!-- Neck -->
+  <path d="M39 30 Q43 27 45 22" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+  <!-- Head -->
+  <ellipse cx="46" cy="20" rx="8" ry="7" fill="white"/>
+
+  <!-- Horn -->
+  <polygon points="51,6 47,17 54,15" fill="#fbbf24"/>
+
+  <!-- Mane -->
+  <path d="M44 14 Q41 18 39 23 Q37 27 40 30" stroke="#f472b6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M42 13 Q39 17 37 22" stroke="#c084fc" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Eye -->
+  <circle cx="48" cy="19" r="2" fill="#4c1d95"/>
+  <circle cx="48.6" cy="18.4" r="0.7" fill="white"/>
+
+  <!-- Legs (running pose) -->
+  <!-- Front right (reaching forward) -->
+  <path d="M40 41 L44 51 L46 52" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Front left -->
+  <path d="M36 43 L35 54" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Back right -->
+  <path d="M24 42 L25 53" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Back left (extending behind) -->
+  <path d="M19 41 L15 51 L13 52" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
