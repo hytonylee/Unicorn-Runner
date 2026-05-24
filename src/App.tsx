@@ -452,7 +452,7 @@ export default function App() {
           <span>Server Status: Blocked by Zebra Policy</span>
         </div>
         <div>
-          <span>© 2026 Fantasy Forest Games</span>
+          <span>© 2026 hytonylee</span>
         </div>
       </footer>
     </div>
