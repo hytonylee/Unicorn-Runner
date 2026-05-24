@@ -6,7 +6,9 @@ Back when I was working on top-of-funnel web experiences, I thought it would be 
 
 Anyway, here it is:
 
-[![Unicorn 404 Runner — Demo](https://cdn.loom.com/sessions/thumbnails/bbf74fbfdaf24253800240dc86480b29-with-play.gif)](https://www.loom.com/share/bbf74fbfdaf24253800240dc86480b29)
+![Unicorn 404 Runner — Demo](public/unicorn_runner.gif)
+
+▶️ [Watch full demo on Loom](https://www.loom.com/share/bbf74fbfdaf24253800240dc86480b29)
 
 ---
 
