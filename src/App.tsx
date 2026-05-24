@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { Trophy, HelpCircle, Volume2, VolumeX, Zap } from 'lucide-react';
+import { Trophy, HelpCircle, Volume2, VolumeX, Zap, Github, Linkedin } from 'lucide-react';
 import { ObstacleType, HighScore } from './types';
 import { OBSTACLES_DATA } from './data/obstacles';
 import { soundManager } from './utils/audio';
@@ -281,23 +281,34 @@ export default function App() {
         className="h-12 bg-black/40 border-t border-white/5 flex items-center px-6 sm:px-8 justify-between z-20 text-[10px] text-slate-400 uppercase tracking-[0.3em] font-mono select-none"
         id="global-page-footer"
       >
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping" />
-          <span>Build: Alpha-7.2 (Offline Mode Active)</span>
-        </div>
+        <a
+          href="https://github.com/hytonylee/Unicorn-Runner"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 hover:text-purple-400 transition-colors"
+        >
+          <Github className="w-3.5 h-3.5" />
+          <span>Fork the Sprint</span>
+        </a>
         <div className="hidden md:block">
           <a
             href="https://www.linkedin.com/in/hytonylee/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-purple-400 transition-colors"
+            className="flex items-center gap-2 hover:text-purple-400 transition-colors"
           >
-            No Roadblocks Found → ☕️ Coffee Chat
+            <Linkedin className="w-3.5 h-3.5" />
+            <span>No Blockers? Let&apos;s Connect</span>
           </a>
         </div>
-        <div>
+        <a
+          href="https://www.linkedin.com/in/hytonylee/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 hover:text-purple-400 transition-colors"
+        >
           <span>© 2026 hytonylee</span>
-        </div>
+        </a>
       </footer>
     </div>
   );
