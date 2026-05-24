@@ -288,7 +288,7 @@ export default function App() {
           className="flex items-center gap-2 hover:text-purple-400 transition-colors"
         >
           <Github className="w-3.5 h-3.5" />
-          <span>Fork the Sprint</span>
+          <span>Fork the Unicorn</span>
         </a>
         <div className="hidden md:block">
           <a
@@ -298,7 +298,7 @@ export default function App() {
             className="flex items-center gap-2 hover:text-purple-400 transition-colors"
           >
             <Linkedin className="w-3.5 h-3.5" />
-            <span>No Blockers? Let&apos;s Connect</span>
+            <span>Let&apos;s Connect</span>
           </a>
         </div>
         <a
