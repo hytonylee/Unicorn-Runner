@@ -449,7 +449,14 @@ export default function App() {
           <span>Build: Alpha-7.2 (Offline Mode Active)</span>
         </div>
         <div className="hidden md:block">
-          <span>Server Status: Blocked by Zebra Policy</span>
+          <a
+            href="https://www.linkedin.com/in/hytonylee/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-purple-400 transition-colors"
+          >
+            No Roadblocks Found → ☕️ Coffee Chat
+          </a>
         </div>
         <div>
           <span>© 2026 hytonylee</span>
