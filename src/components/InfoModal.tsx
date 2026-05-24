@@ -119,7 +119,7 @@ export default function InfoModal({
 
             <div className="p-6 md:p-8 text-center">
               {/* Immersive crash explosion bubble */}
-              <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mb-5 border border-red-500/50 mx-auto shadow-[0_0_20px_rgba(239,68,68,0.2)]">
+              <div className="hidden sm:flex w-20 h-20 bg-red-500/20 rounded-full items-center justify-center mb-5 border border-red-500/50 mx-auto shadow-[0_0_20px_rgba(239,68,68,0.2)]">
                 <span className="text-4xl">💥</span>
               </div>
 
