@@ -3,6 +3,7 @@ import { Award, Trash2 } from 'lucide-react';
 import { OBSTACLES_DATA } from '../data/obstacles';
 import { soundManager } from '../utils/audio';
 import { User } from 'firebase/auth';
+import { FIREBASE_ENABLED } from '../lib/firebase';
 import { PanelCard } from './ui/PanelCard';
 import { PanelHeader } from './ui/PanelHeader';
 import { Badge } from './ui/Badge';
@@ -54,45 +55,47 @@ export default function Leaderboard({
       />
 
       {/* Real-time Cloud Sync / Authenticated user details */}
-      <div className="mb-4 bg-slate-950/60 border border-purple-500/10 p-3 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 relative z-10 text-xs">
-        {user ? (
-          <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-2">
-              {user.photoURL ? (
-                <img src={user.photoURL} alt={user.displayName || 'Player'} referrerPolicy="no-referrer" className="w-6 h-6 rounded-full border border-purple-500/50" />
-              ) : (
-                <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-xs text-purple-300 border border-purple-500/30">
-                  PM
+      {FIREBASE_ENABLED && (
+        <div className="mb-4 bg-slate-950/60 border border-purple-500/10 p-3 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 relative z-10 text-xs">
+          {user ? (
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center gap-2">
+                {user.photoURL ? (
+                  <img src={user.photoURL} alt={user.displayName || 'Player'} referrerPolicy="no-referrer" className="w-6 h-6 rounded-full border border-purple-500/50" />
+                ) : (
+                  <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-xs text-purple-300 border border-purple-500/30">
+                    PM
+                  </div>
+                )}
+                <div className="text-left">
+                  <div className="font-bold text-slate-200 truncate max-w-[120px]">{user.displayName || 'Authenticated PM'}</div>
+                  <div className="text-[9px] font-mono text-purple-400 uppercase tracking-widest">Active Google Sync</div>
                 </div>
-              )}
-              <div className="text-left">
-                <div className="font-bold text-slate-200 truncate max-w-[120px]">{user.displayName || 'Authenticated PM'}</div>
-                <div className="text-[9px] font-mono text-purple-400 uppercase tracking-widest">Active Google Sync</div>
               </div>
+              <button
+                onClick={onSignOut}
+                className="px-2.5 py-1 bg-red-500/10 text-red-400 border border-red-500/20 rounded-lg hover:bg-red-500/25 text-[10px] uppercase font-mono transition-all cursor-pointer"
+              >
+                Sign Out
+              </button>
             </div>
-            <button
-              onClick={onSignOut}
-              className="px-2.5 py-1 bg-red-500/10 text-red-400 border border-red-500/20 rounded-lg hover:bg-red-500/25 text-[10px] uppercase font-mono transition-all cursor-pointer"
-            >
-              Sign Out
-            </button>
-          </div>
-        ) : (
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between w-full gap-2.5 text-left">
-            <div>
-              <div className="font-bold text-slate-200">Cloud Leaderboard Active</div>
-              <p className="text-[10px] text-slate-400 leading-tight">Log in to sync scores globally with other players!</p>
+          ) : (
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between w-full gap-2.5 text-left">
+              <div>
+                <div className="font-bold text-slate-200">Cloud Leaderboard Active</div>
+                <p className="text-[10px] text-slate-400 leading-tight">Log in to sync scores globally with other players!</p>
+              </div>
+              <button
+                onClick={onSignIn}
+                disabled={isOffline}
+                className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded-xl shadow-[0_0_10px_rgba(168,85,247,0.3)] transition-all font-semibold flex items-center justify-center gap-1 cursor-pointer text-[10px] uppercase font-mono tracking-wider"
+              >
+                🚀 Google Log In
+              </button>
             </div>
-            <button
-              onClick={onSignIn}
-              disabled={isOffline}
-              className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded-xl shadow-[0_0_10px_rgba(168,85,247,0.3)] transition-all font-semibold flex items-center justify-center gap-1 cursor-pointer text-[10px] uppercase font-mono tracking-wider"
-            >
-              🚀 Google Log In
-            </button>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
 
       <div className="space-y-2 max-h-64 overflow-y-auto pr-1 relative z-10" id="scores-container-list">
         {scores.length === 0 ? (
@@ -158,7 +161,9 @@ export default function Leaderboard({
       </div>
 
       <div className="mt-4 pt-3 border-t border-slate-800/40 text-[10px] text-slate-500 font-mono text-left" id="scores-panel-footer">
-        {isOffline ? (
+        {!FIREBASE_ENABLED ? (
+          <span>* Local mode. Scores saved in your browser&apos;s localStorage.</span>
+        ) : isOffline ? (
           <span>* Offline mode active. Syncing locally to the browser&apos;s LocalStorage cache database.</span>
         ) : (
           <span>* Synced globally and securely using the Cloud Firestore database instance.</span>

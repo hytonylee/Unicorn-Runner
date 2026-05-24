@@ -1,11 +1,22 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
+import { initializeApp, FirebaseApp } from 'firebase/app';
+import { getAuth, Auth } from 'firebase/auth';
+import { getFirestore, Firestore, doc, getDocFromServer } from 'firebase/firestore';
 import firebaseConfig from '../../firebase-applet-config.json';
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId); /* CRITICAL: The app will break without this line */
-export const auth = getAuth();
+export const FIREBASE_ENABLED = !!firebaseConfig?.apiKey;
+
+let _app: FirebaseApp | null = null;
+let _db: Firestore | null = null;
+let _auth: Auth | null = null;
+
+if (FIREBASE_ENABLED) {
+  _app = initializeApp(firebaseConfig);
+  _db = getFirestore(_app, firebaseConfig.firestoreDatabaseId);
+  _auth = getAuth(_app);
+}
+
+export const db = _db as Firestore;
+export const auth = _auth as Auth;
 
 export enum OperationType {
   CREATE = 'create',
@@ -54,7 +65,6 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
   throw new Error(JSON.stringify(errInfo));
 }
 
-// CRITICAL CONSTRAINT: Validate initial firestore connection on load
 async function testConnection() {
   try {
     await getDocFromServer(doc(db, 'test', 'connection'));
@@ -64,4 +74,4 @@ async function testConnection() {
     }
   }
 }
-testConnection();
+if (FIREBASE_ENABLED) testConnection();

@@ -5,6 +5,7 @@ import { OBSTACLES_DATA, getThemeForLevel } from '../data/obstacles';
 import { soundManager } from '../utils/audio';
 import { RotateCcw, Award, Flame, Lightbulb, Share2, HelpCircle, User as UserIcon, Check, X } from 'lucide-react';
 import { User } from 'firebase/auth';
+import { FIREBASE_ENABLED } from '../lib/firebase';
 import { Badge } from './ui/Badge';
 
 interface InfoModalProps {
@@ -200,10 +201,12 @@ export default function InfoModal({
                       <Award className="w-5 h-5 animate-bounce" />
                       <span className="font-display font-bold text-xs uppercase tracking-wider">New High Score Record!</span>
                     </div>
-                    {user ? (
-                      <Badge color="emerald">Google Synced</Badge>
-                    ) : (
-                      <Badge color="amber">Guest Mode</Badge>
+                    {FIREBASE_ENABLED && (
+                      user ? (
+                        <Badge color="emerald">Google Synced</Badge>
+                      ) : (
+                        <Badge color="amber">Guest Mode</Badge>
+                      )
                     )}
                   </div>
                   
@@ -225,7 +228,7 @@ export default function InfoModal({
                     </span>
                   </div>
 
-                  {!user && (
+                  {FIREBASE_ENABLED && !user && (
                     <p className="text-[10px] text-slate-400 leading-tight">
                       ℹ️ You don't need Google authorization to list your score! Your typed name will be registered directly onto the global PM Hall of Fame.
                     </p>

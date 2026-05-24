@@ -4,7 +4,7 @@ import { ObstacleType, HighScore } from './types';
 import { OBSTACLES_DATA } from './data/obstacles';
 import { soundManager } from './utils/audio';
 
-import { auth } from './lib/firebase';
+import { auth, FIREBASE_ENABLED } from './lib/firebase';
 import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut, User } from 'firebase/auth';
 import { scoreStore, RateLimitError } from './lib/scoreStore';
 import { gameReducer, initialGameState } from './reducers/gameReducer';
@@ -33,6 +33,7 @@ export default function App() {
 
   // Google auth state
   useEffect(() => {
+    if (!FIREBASE_ENABLED) return;
     return onAuthStateChanged(auth, setUser);
   }, []);
 

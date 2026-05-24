@@ -1,5 +1,5 @@
 import { collection, query, orderBy, limit, onSnapshot, doc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from './firebase';
+import { db, FIREBASE_ENABLED } from './firebase';
 import { HighScore } from '../types';
 
 const LS_SCORES_KEY = 'pm_unicorn_high_scores_list';
@@ -93,7 +93,7 @@ export const scoreStore = {
     isOffline: boolean,
     onUpdate: (scores: HighScore[]) => void
   ): () => void {
-    if (isOffline) {
+    if (isOffline || !FIREBASE_ENABLED) {
       onUpdate(getLocalScores());
       return () => {};
     }
@@ -149,7 +149,7 @@ export const scoreStore = {
       .slice(0, 50);
     localStorage.setItem(LS_SCORES_KEY, JSON.stringify(localList));
 
-    if (!isOffline) {
+    if (!isOffline && FIREBASE_ENABLED) {
       const scoreDocId = entry.userId
         ? `score-${entry.userId}-${Date.now()}`
         : `score-anon-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
