@@ -124,7 +124,7 @@ export default function InfoModal({
               </div>
 
               <h2 className="text-xl md:text-2xl font-black mb-1 text-red-400 font-display tracking-tight uppercase">
-                GAME OVER: COLLISION DETECTED
+                RUNWAY DEPLETED
               </h2>
               <div className="text-xs text-purple-400 font-mono tracking-widest uppercase mb-6" id="modal-current-level-display">
                 {getThemeForLevel(score).levelName}
