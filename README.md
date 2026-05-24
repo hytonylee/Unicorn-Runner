@@ -8,7 +8,7 @@ Anyway, here it is:
 
 ![Unicorn 404 Runner — Demo](public/unicorn_runner.gif)
 
-▶️ [Watch full demo on Loom](https://www.loom.com/share/bbf74fbfdaf24253800240dc86480b29)
+🦄 [Play it live](https://unicorn-runner.vercel.app/) · ▶️ [Watch full demo on Loom](https://www.loom.com/share/bbf74fbfdaf24253800240dc86480b29)
 
 ---
 
