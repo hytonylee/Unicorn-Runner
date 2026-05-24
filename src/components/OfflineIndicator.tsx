@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Wifi, WifiOff, Pocket, CloudLightning, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { soundManager } from '../utils/audio';
+import { PanelCard } from './ui/PanelCard';
+import { PanelHeader } from './ui/PanelHeader';
 
 interface OfflineIndicatorProps {
   isSimulatedOffline: boolean;
@@ -36,34 +38,29 @@ export default function OfflineIndicator({
   const offlineActive = !actualOnline || isSimulatedOffline;
 
   return (
-    <div 
-      className="glass-panel rounded-3xl p-5 md:p-6 shadow-2xl text-left relative overflow-hidden"
-      id="offline-engine-panel"
-    >
+    <PanelCard className="text-left" id="offline-engine-panel">
       <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
 
-      <div className="flex items-center justify-between mb-4 pb-2 border-b border-purple-500/20">
-        <h3 className="text-sm font-bold font-display text-white tracking-tight glow-text uppercase italic flex items-center gap-2">
-          {offlineActive ? (
-            <WifiOff className="w-4 h-4 text-rose-400" />
-          ) : (
-            <Wifi className="w-4 h-4 text-purple-400" />
-          )}
-          Offline-First status
-        </h3>
-
-        <button
-          onClick={toggleMockOffline}
-          id="toggle-mock-offline-btn"
-          className={`px-3 py-1 text-xs rounded-xl font-mono border transition-all duration-300 font-semibold uppercase tracking-wider ${
-            isSimulatedOffline
-              ? 'bg-rose-500/10 text-rose-400 border-rose-500/20 hover:bg-rose-500/20'
-              : 'bg-slate-800 text-slate-400 border-slate-700/60 hover:bg-slate-700 hover:text-white'
-          }`}
-        >
-          {isSimulatedOffline ? 'Offline Active' : 'Simulate Offline'}
-        </button>
-      </div>
+      <PanelHeader
+        icon={offlineActive
+          ? <WifiOff className="w-4 h-4 text-rose-400" />
+          : <Wifi className="w-4 h-4 text-purple-400" />
+        }
+        title="Offline-First Status"
+        action={
+          <button
+            onClick={toggleMockOffline}
+            id="toggle-mock-offline-btn"
+            className={`px-3 py-1 text-xs rounded-xl font-mono border transition-all duration-300 font-semibold uppercase tracking-wider ${
+              isSimulatedOffline
+                ? 'bg-rose-500/10 text-rose-400 border-rose-500/20 hover:bg-rose-500/20'
+                : 'bg-slate-800 text-slate-400 border-slate-700/60 hover:bg-slate-700 hover:text-white'
+            }`}
+          >
+            {isSimulatedOffline ? 'Offline Active' : 'Simulate Offline'}
+          </button>
+        }
+      />
 
       <div className="space-y-4" id="offline-summary-card">
         {/* Connection status pills */}
@@ -89,7 +86,6 @@ export default function OfflineIndicator({
           </div>
         </div>
 
-        {/* Informative text on why it works offline */}
         <p className="text-xs text-slate-400 leading-relaxed font-sans">
           In strict compliance with classic Google Chrome 404 Dino game design patterns, this applet incorporates a stateful, offline-first client architecture:
         </p>
@@ -116,9 +112,8 @@ export default function OfflineIndicator({
           </div>
         </div>
 
-        {/* Warning card when offline simulated is active */}
         {offlineActive && (
-          <div 
+          <div
             className="p-3 bg-rose-500/5 border border-rose-500/20 rounded-xl flex items-start gap-2.5 text-rose-300"
             id="mock-offline-alert-box"
           >
@@ -129,6 +124,6 @@ export default function OfflineIndicator({
           </div>
         )}
       </div>
-    </div>
+    </PanelCard>
   );
 }

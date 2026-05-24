@@ -5,6 +5,7 @@ import { OBSTACLES_DATA, getThemeForLevel } from '../data/obstacles';
 import { soundManager } from '../utils/audio';
 import { RotateCcw, Award, Flame, Lightbulb, Share2, HelpCircle, User as UserIcon, Check, X } from 'lucide-react';
 import { User } from 'firebase/auth';
+import { Badge } from './ui/Badge';
 
 interface InfoModalProps {
   isOpen: boolean;
@@ -14,7 +15,7 @@ interface InfoModalProps {
   onRestart: (playerName: string) => void;
   highScores: any[];
   isNewHighScore: boolean;
-  onClose: () => void;
+  onClose: (playerName: string) => void;
   user: User | null;
 }
 
@@ -84,7 +85,7 @@ export default function InfoModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-slate-950/85 backdrop-blur-md"
-            onClick={onClose}
+            onClick={() => onClose(playerName)}
           />
 
           {/* Modal Container */}
@@ -107,7 +108,7 @@ export default function InfoModal({
 
             {/* Top Right Close Button */}
             <button
-              onClick={onClose}
+              onClick={() => onClose(playerName)}
               id="close-modal-top-x"
               className="absolute top-5 right-5 text-slate-400 hover:text-white bg-slate-950/60 rounded-full p-2 border border-white/10 hover:border-purple-500/30 hover:scale-105 active:scale-95 transition-all cursor-pointer z-20"
               aria-label="Close"
@@ -200,9 +201,9 @@ export default function InfoModal({
                       <span className="font-display font-bold text-xs uppercase tracking-wider">New High Score Record!</span>
                     </div>
                     {user ? (
-                      <span className="text-[9px] font-mono text-emerald-400 uppercase bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">Google Synced</span>
+                      <Badge color="emerald">Google Synced</Badge>
                     ) : (
-                      <span className="text-[9px] font-mono text-amber-400 uppercase bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20">Guest Mode</span>
+                      <Badge color="amber">Guest Mode</Badge>
                     )}
                   </div>
                   
@@ -215,7 +216,7 @@ export default function InfoModal({
                         id="player-name-input"
                         value={playerName}
                         onChange={(e) => setPlayerName(e.target.value)}
-                        placeholder="Enter your name to log score..."
+                        placeholder="Add your name, brave PM..."
                         className="w-full bg-slate-950/80 border border-purple-500/20 focus:border-purple-500 rounded-xl py-2 pl-9 pr-4 text-xs text-white placeholder-slate-500 md:text-sm focus:outline-none transition-colors"
                       />
                     </div>

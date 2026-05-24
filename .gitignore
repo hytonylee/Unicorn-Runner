@@ -6,3 +6,9 @@ coverage/
 *.log
 .env*
 !.env.example
+
+
+# not related files
+.agents
+.claude
+skills-lock.json
