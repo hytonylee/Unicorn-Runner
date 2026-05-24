@@ -16,10 +16,14 @@ Anyway, here it is:
 
 After deploying, set these environment variables in your Vercel project settings:
 
-| Variable | Description |
-|---|---|
-| `GEMINI_API_KEY` | Your [Google Gemini API key](https://aistudio.google.com/app/apikey) |
-| `APP_URL` | The URL of your deployed app (e.g. `https://your-app.vercel.app`) |
+| Variable | Required | Description |
+|---|---|---|
+| `GEMINI_API_KEY` | Yes | Your [Google Gemini API key](https://aistudio.google.com/app/apikey) |
+| `APP_URL` | Yes | The URL of your deployed app (e.g. `https://your-app.vercel.app`) |
+
+### Firebase (optional)
+
+The game works without Firebase — scores are saved locally in the browser. If you want a live global leaderboard and Google sign-in, set up a Firebase project and update `firebase-applet-config.json` with your own config. To disable Firebase entirely, clear the `apiKey` field in that file and the Google auth UI will be hidden automatically.
 
 ---
 
