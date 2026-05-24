@@ -459,6 +459,7 @@ export default function GameCanvas({
   };
 
   return (
+    <>
     <div
       className="relative w-full rounded-2xl overflow-hidden cursor-pointer"
       onClick={handleCanvasAction}
@@ -473,50 +474,17 @@ export default function GameCanvas({
         className="w-full h-auto bg-slate-950 block border border-slate-800/80 rounded-2xl shadow-2xl transition-all duration-300"
       />
 
-      {/* Mobile touch controls */}
-      {gameStarted && !gameOver && (
-        <div
-          className="absolute bottom-4 left-4 right-4 flex justify-between pointer-events-none select-none z-10"
-          id="mobile-touch-play-triggers"
-        >
-          <button
-            onMouseDown={handleDodgeStart}
-            onMouseUp={handleDodgeEnd}
-            onMouseLeave={handleDodgeEnd}
-            onTouchStart={handleDodgeStart}
-            onTouchEnd={handleDodgeEnd}
-            id="touch-dodge-trigger"
-            className="pointer-events-auto w-14 h-14 sm:w-16 sm:h-16 bg-slate-900/40 hover:bg-slate-900/60 active:bg-purple-600/30 text-white border border-purple-500/20 rounded-2xl flex flex-col items-center justify-center backdrop-blur-md active:scale-95 transition-all select-none shadow-lg outline-none"
-          >
-            <span className="text-lg sm:text-xl">⬇️</span>
-            <span className="text-[8px] sm:text-[9.5px] font-mono tracking-wider font-bold text-purple-300">DODGE</span>
-          </button>
-          <button
-            onMouseDown={handleJumpStart}
-            onMouseUp={handleJumpEnd}
-            onMouseLeave={handleJumpEnd}
-            onTouchStart={handleJumpStart}
-            onTouchEnd={handleJumpEnd}
-            id="touch-jump-trigger"
-            className="pointer-events-auto w-14 h-14 sm:w-16 sm:h-16 bg-slate-900/40 hover:bg-slate-900/60 active:bg-purple-600/30 text-white border border-purple-500/20 rounded-2xl flex flex-col items-center justify-center backdrop-blur-md active:scale-95 transition-all select-none shadow-lg outline-none"
-          >
-            <span className="text-lg sm:text-xl">⬆️</span>
-            <span className="text-[8px] sm:text-[9.5px] font-mono tracking-wider font-bold text-purple-300">JUMP</span>
-          </button>
-        </div>
-      )}
-
       {/* Start screen overlay */}
       {!gameStarted && !gameOver && (
         <div
-          className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm flex flex-col items-center justify-center text-center p-4 md:p-6 animate-fade-in"
+          className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm flex flex-col items-center justify-center text-center p-3 md:p-6 animate-fade-in"
           id="ready-screen-overlay"
         >
-          <div className="text-4xl md:text-5xl lg:text-6xl animate-float mb-2 md:mb-3" id="intro-emoji">🦄</div>
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-white font-display tracking-tight mb-1 md:mb-2 uppercase glow-text italic" id="intro-title">
+          <div className="text-3xl md:text-5xl lg:text-6xl animate-float mb-1 md:mb-3 hidden sm:block" id="intro-emoji">🦄</div>
+          <h2 className="text-base md:text-2xl lg:text-3xl font-black text-white font-display tracking-tight mb-1 md:mb-2 uppercase glow-text italic" id="intro-title">
             Can You Lead the Unicorn to Launch?
           </h2>
-          <p className="text-slate-300 text-[11px] md:text-xs lg:text-sm max-w-md mb-4 md:mb-5 leading-relaxed" id="intro-tagline">
+          <p className="text-slate-300 text-[10px] md:text-xs lg:text-sm max-w-md mb-3 md:mb-5 leading-relaxed hidden sm:block" id="intro-tagline">
             Dodge the 5 most dangerous animal personalities of Product Management. Jump over blockers, plus crouch/dodge under high flying Seagulls!
           </p>
           <button
@@ -526,11 +494,11 @@ export default function GameCanvas({
               onRequestStart();
             }}
             id="start-button-overlay"
-            className="px-5 py-2 md:px-6 md:py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(168,85,247,0.4)] active:scale-95 transition-all text-xs md:text-sm tracking-widest uppercase cursor-pointer"
+            className="px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(168,85,247,0.4)] active:scale-95 transition-all text-xs md:text-sm tracking-widest uppercase cursor-pointer"
           >
             LAUNCH PRODUCT
           </button>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-[10px] md:text-xs text-slate-500 font-mono" id="intro-keys">
+          <div className="mt-3 hidden md:flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-[10px] md:text-xs text-slate-500 font-mono" id="intro-keys">
             <span className="flex items-center gap-1.5"><span className="text-purple-400 bg-purple-500/10 px-1 py-0.2 rounded border border-purple-500/20">SPACE / CLICK</span> Jump</span>
             <span className="flex items-center gap-1.5"><span className="text-purple-400 bg-purple-500/10 px-1 py-0.2 rounded border border-purple-500/20">S / ARROW DOWN</span> Dodge / Fast Fall</span>
           </div>
@@ -565,5 +533,39 @@ export default function GameCanvas({
         </div>
       )}
     </div>
+
+    {/* Mobile touch controls — rendered below canvas so they never overlap the game */}
+    {gameStarted && !gameOver && (
+      <div
+        className="flex justify-between mt-3 px-1 select-none sm:hidden"
+        id="mobile-touch-play-triggers"
+      >
+        <button
+          onMouseDown={handleDodgeStart}
+          onMouseUp={handleDodgeEnd}
+          onMouseLeave={handleDodgeEnd}
+          onTouchStart={handleDodgeStart}
+          onTouchEnd={handleDodgeEnd}
+          id="touch-dodge-trigger"
+          className="w-24 h-14 bg-slate-900/80 active:bg-purple-600/30 text-white border border-purple-500/20 rounded-2xl flex flex-col items-center justify-center active:scale-95 transition-all shadow-lg outline-none"
+        >
+          <span className="text-xl">⬇️</span>
+          <span className="text-[9px] font-mono tracking-wider font-bold text-purple-300">DODGE</span>
+        </button>
+        <button
+          onMouseDown={handleJumpStart}
+          onMouseUp={handleJumpEnd}
+          onMouseLeave={handleJumpEnd}
+          onTouchStart={handleJumpStart}
+          onTouchEnd={handleJumpEnd}
+          id="touch-jump-trigger"
+          className="w-24 h-14 bg-slate-900/80 active:bg-purple-600/30 text-white border border-purple-500/20 rounded-2xl flex flex-col items-center justify-center active:scale-95 transition-all shadow-lg outline-none"
+        >
+          <span className="text-xl">⬆️</span>
+          <span className="text-[9px] font-mono tracking-wider font-bold text-purple-300">JUMP</span>
+        </button>
+      </div>
+    )}
+    </>
   );
 }
