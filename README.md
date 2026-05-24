@@ -10,12 +10,25 @@ Anyway, here it is:
 
 ---
 
+## Self-host in one click
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/hytonylee/Unicorn-Runner)
+
+After deploying, set these environment variables in your Vercel project settings:
+
+| Variable | Description |
+|---|---|
+| `GEMINI_API_KEY` | Your [Google Gemini API key](https://aistudio.google.com/app/apikey) |
+| `APP_URL` | The URL of your deployed app (e.g. `https://your-app.vercel.app`) |
+
+---
+
 ## Run Locally
 
-**Prerequisites:** Node.js
+**Prerequisites:** Node.js 22+, [pnpm](https://pnpm.io)
 
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+   `pnpm install`
+2. Copy `.env.example` to `.env.local` and set your `GEMINI_API_KEY`
 3. Run the app:
-   `npm run dev`
+   `pnpm dev`
