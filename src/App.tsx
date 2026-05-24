@@ -278,7 +278,7 @@ export default function App() {
       />
 
       <footer
-        className="h-12 bg-black/40 border-t border-white/5 flex items-center px-6 sm:px-8 justify-between z-20 text-[10px] text-slate-400 uppercase tracking-[0.3em] font-mono select-none"
+        className="fixed bottom-0 left-0 right-0 h-12 bg-black/40 backdrop-blur-sm border-t border-white/5 flex items-center px-6 sm:px-8 justify-between z-20 text-[10px] text-slate-400 uppercase tracking-[0.3em] font-mono select-none"
         id="global-page-footer"
       >
         <a
