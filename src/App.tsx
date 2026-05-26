@@ -17,6 +17,8 @@ import { PanelCard } from './components/ui/PanelCard';
 import { PanelHeader } from './components/ui/PanelHeader';
 import { Badge } from './components/ui/Badge';
 
+import { Analytics } from "@vercel/analytics/next"
+
 export default function App() {
   // Game lifecycle state — transitions are atomic via reducer
   const [game, dispatch] = useReducer(gameReducer, initialGameState);
@@ -138,7 +140,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen pb-16 flex flex-col justify-between" id="applet-viewport">
-
+      <Analytics/>
       {/* Offline mode banner */}
       {isSimulatedOffline && (
         <div
