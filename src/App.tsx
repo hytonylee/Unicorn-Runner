@@ -17,7 +17,7 @@ import { PanelCard } from './components/ui/PanelCard';
 import { PanelHeader } from './components/ui/PanelHeader';
 import { Badge } from './components/ui/Badge';
 
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 export default function App() {
   // Game lifecycle state — transitions are atomic via reducer
