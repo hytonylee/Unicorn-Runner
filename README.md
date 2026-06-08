@@ -38,3 +38,8 @@ The game works without Firebase — scores are saved locally in the browser. If 
 2. Copy `.env.example` to `.env.local` and set your `GEMINI_API_KEY`
 3. Run the app:
    `pnpm dev`
+--
+
+## Resources I used
+- [SideScroller Game Tutorial](https://www.youtube.com/watch?v=nKBhz6oJYsc_)
+- [Offline T-Rex Runner](https://www.youtube.com/watch?v=ooru4pyEv1I)
